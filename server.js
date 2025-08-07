@@ -21,11 +21,10 @@ app.post('/chat', async (req, res) => {
   const { message } = req.body;
 
   try {
-    const response = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: [
-        { role: 'system', content: `Si asistent firmy. Odpovedaj iba na základe týchto informácií: ${companyInfo}. Ak nevieš odpoveď, povedz 'Ospravedlňujem sa, nemám informáciu o tejto téme.'` },
-        { role: 'user', content: message },
+const systemMessage = {
+  role: "system",
+  content: "Si milý a užitočný asistent zákazníckej podpory. Tvojou hlavnou úlohou je poskytovať presné a zdvorilé odpovede, ktoré pomôžu zákazníkom s ich otázkami. Používaj informácie, ktoré máš k dispozícii, ale vždy buď priateľský a ochotný. Ak nevieš na otázku odpovedať, odpovedz presne vetou: 'Ospravedlňujem sa, s týmto vám neviem pomôcť.' "
+};
       ],
     });
 
