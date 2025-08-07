@@ -1,5 +1,14 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/server.js" }
+  "routes": [
+    {
+      "src": "/api/chat",
+      "methods": ["POST"],
+      "dest": "index.js"
+    },
+    {
+      "src": "/chat",
+      "methods": ["POST"],
+      "dest": "index.js"
+    }
   ]
 }
