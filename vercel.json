@@ -1,9 +1,13 @@
 {
-  "routes": [
+  "functions": {
+    "index.js": {
+      "runtime": "node.js"
+    }
+  },
+  "rewrites": [
     {
-      "src": "/chat",
-      "methods": ["POST"],
-      "dest": "index.js"
+      "source": "/chat",
+      "destination": "/index.js"
     }
   ]
 }
