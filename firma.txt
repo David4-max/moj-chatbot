@@ -1,14 +1,2 @@
-Názov našej firmy je SuperFirma.
-Poskytujeme tieto služby:
-- Oprava počítačov
-- Inštalácia softvéru
-- Predaj príslušenstva
-
-Naše otváracie hodiny:
-Po-Pia: 9:00 - 18:00
-So-Ne: zatvorené
-
-Kontakt na nás:
-E-mail: info@superfirma.sk
-Telefón: +421 900 123 456
-Adresa: Hlavná 1, Bratislava
+Názov firmy: Moj chatbot s.r.o.
+Poskytujeme zákaznícku podporu 24/7.
