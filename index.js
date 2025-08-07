@@ -4,6 +4,7 @@ const fs = require('fs');
 const cors = require('cors');
 const app = express();
 const port = 3000;
+dotenv.config({ override: true });
 
 // Middleware pre spracovanie JSON požiadaviek
 app.use(express.json());
