@@ -1,13 +1,9 @@
 const express = require('express');
 const { OpenAI } = require('openai');
-const dotenv = require('dotenv');
 const fs = require('fs');
 const cors = require('cors');
 const app = express();
 const port = 3000;
-
-// Načíta premenné prostredia z .env súboru a prepíše existujúce
-dotenv.config({ override: true });
 
 // Middleware pre spracovanie JSON požiadaviek
 app.use(express.json());
@@ -18,6 +14,7 @@ app.use(cors());
 // Nastaví statický priečinok pre frontend (ak nejaký máš)
 app.use(express.static('public'));
 
+// Tu je dôležitá zmena: premenná OPENAI_API_KEY sa bude brať priamo z Vercelu
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const companyInfo = fs.readFileSync('firma.txt', 'utf8');
 const systemMessage = `
@@ -56,5 +53,4 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-module.exports = app;
 module.exports = app;
