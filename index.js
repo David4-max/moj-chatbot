@@ -6,8 +6,7 @@ const app = express();
 const port = 3000;
 
 // Načíta premenné prostredia z .env súboru
-dotenv.config();
-
+dotenv.config({ override: true });
 // Middleware pre spracovanie JSON požiadaviek
 app.use(express.json());
 
