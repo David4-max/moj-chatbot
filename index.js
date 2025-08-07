@@ -4,7 +4,7 @@ const fs = require('fs');
 const cors = require('cors');
 const app = express();
 const port = 3000;
-dotenv.config({ override: true });
+
 app.use(express.json());
 app.use(cors());
 app.use(express.static('public'));
