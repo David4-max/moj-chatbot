@@ -10,8 +10,7 @@ const port = 3000;
 app.use(express.static('public'));
 app.use(express.json());
 app.use(cors());
-
-const openai = new OpenAI({
+const API_URL = '/api/chat';
   apiKey: process.env.OPENAI_API_KEY,
 });
 
@@ -25,7 +24,6 @@ const systemMessage = {
   role: "system",
   content: "Si milý a užitočný asistent zákazníckej podpory. Tvojou hlavnou úlohou je poskytovať presné a zdvorilé odpovede, ktoré pomôžu zákazníkom s ich otázkami. Používaj informácie, ktoré máš k dispozícii, ale vždy buď priateľský a ochotný. Ak nevieš na otázku odpovedať, odpovedz presne vetou: 'Ospravedlňujem sa, s týmto vám neviem pomôcť.' "
 };
-      ],
     });
 
     res.json({ reply: response.choices[0].message.content });
