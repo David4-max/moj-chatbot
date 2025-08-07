@@ -2,20 +2,14 @@ const express = require('express');
 const { OpenAI } = require('openai');
 const dotenv = require('dotenv');
 const fs = require('fs');
-const cors = require('cors'); 
+const cors = require('cors');
 const app = express();
 const port = 3000;
 
-// Načíta premenné prostredia z .env súboru a prepíše existujúce
 dotenv.config({ override: true });
 
-// Middleware pre spracovanie JSON požiadaviek
 app.use(express.json());
-
-// Umožňuje CORS (Cross-Origin Resource Sharing)
 app.use(cors());
-
-// Nastaví statický priečinok pre frontend
 app.use(express.static('public'));
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
@@ -29,7 +23,6 @@ const systemMessage = `
   ${companyInfo}
 `;
 
-// Hlavný endpoint pre chat
 app.post('/chat', async (req, res) => {
   try {
     const message = req.body.message;
@@ -41,7 +34,6 @@ app.post('/chat', async (req, res) => {
       ],
       max_tokens: 150
     });
-
     res.json({ reply: completion.choices[0].message.content });
   } catch (error) {
     console.error('Chyba pri komunikácii s OpenAI:', error);
@@ -49,7 +41,6 @@ app.post('/chat', async (req, res) => {
   }
 });
 
-// Tento kód zaistí, aby sa aplikácia dala exportovať pre Vercel
 if (process.env.NODE_ENV !== 'production') {
   app.listen(port, () => {
     console.log(`Server beží na http://localhost:${port}`);
