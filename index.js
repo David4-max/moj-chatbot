@@ -2,18 +2,20 @@ const express = require('express');
 const { OpenAI } = require('openai');
 const dotenv = require('dotenv');
 const fs = require('fs');
+const cors = require('cors'); 
 const app = express();
 const port = 3000;
 
-// Načíta premenné prostredia z .env súboru
+// Načíta premenné prostredia z .env súboru a prepíše existujúce
 dotenv.config({ override: true });
+
 // Middleware pre spracovanie JSON požiadaviek
 app.use(express.json());
 
 // Umožňuje CORS (Cross-Origin Resource Sharing)
-app.use(express.cors());
+app.use(cors());
 
-// Nastaví statický priečinok pre frontend (ak nejaký máš)
+// Nastaví statický priečinok pre frontend
 app.use(express.static('public'));
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
