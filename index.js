@@ -2,7 +2,7 @@ const express = require('express');
 const { OpenAI } = require('openai');
 const dotenv = require('dotenv');
 const fs = require('fs');
-const cors = require('cors'); 
+const cors = require('cors');
 const app = express();
 const port = 3000;
 
