@@ -10,6 +10,11 @@ body {
 
 /* Hlavný kontajner pre celú aplikáciu */
 .chat-container {
+    /* Umiestnenie do pravého dolného rohu */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
     width: 100%;
     max-width: 350px; /* Zmenšená šírka */
     height: 60vh; /* Zmenšená výška */
