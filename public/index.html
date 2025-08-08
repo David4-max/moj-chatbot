@@ -1,29 +1,116 @@
-
+<!DOCTYPE html>
 <html lang="sk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Bot</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Môj Chatbot</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .chat-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 300px;
+      max-height: 400px;
+      background-color: #e6f2ff;
+      border: 1px solid #99ccff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .chat-header {
+      background-color: #b3d9ff;
+      padding: 10px;
+      font-weight: bold;
+      text-align: center;
+      border-bottom: 1px solid #99ccff;
+    }
+    .chat-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 14px;
+    }
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #99ccff;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+    .chat-input button {
+      padding: 10px;
+      background-color: #66b3ff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .chat-input button:hover {
+      background-color: #3399ff;
+    }
+    .message {
+      margin-bottom: 8px;
+    }
+    .user {
+      font-weight: bold;
+      color: #0059b3;
+    }
+    .bot {
+      font-weight: bold;
+      color: #006600;
+    }
+  </style>
 </head>
 <body>
-    <div class="chat-container">
-        <!-- Pridanie nadpisu "BOT" -->
-        <h1 class="chat-title">BOT</h1>
-        
-        <!-- Sekcia pre zobrazenie správ -->
-        <div class="chat-messages" id="chat-messages">
-            <!-- Správy budú pridané pomocou JavaScriptu -->
-        </div>
 
-        <!-- Formulár na odosielanie správ -->
-        <form id="chat-form" class="chat-input">
-            <input type="text" id="user-input" placeholder="Napíšte správu..." required>
-            <button type="submit">Odoslať</button>
-        </form>
-    </div>
+<div class="chat-container">
+  <div class="chat-header">Chatbot</div>
+  <div class="chat-messages" id="chat-messages"></div>
+  <div class="chat-input">
+    <input type="text" id="user-input" placeholder="Napíš správu...">
+    <button onclick="sendMessage()">Odoslať</button>
+  </div>
+</div>
 
-    <script src="app.js"></script>
+<script>
+  async function sendMessage() {
+    const input = document.getElementById('user-input');
+    const messagesDiv = document.getElementById('chat-messages');
+    const message = input.value.trim();
+    if (!message) return;
+
+    // zobrazenie správy používateľa
+    messagesDiv.innerHTML += `<div class="message"><span class="user">Ty:</span> ${message}</div>`;
+    input.value = '';
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+    try {
+      const res = await fetch('/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      });
+      const data = await res.json();
+      messagesDiv.innerHTML += `<div class="message"><span class="bot">Bot:</span> ${data.reply}</div>`;
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    } catch (err) {
+      messagesDiv.innerHTML += `<div class="message"><span class="bot">Bot:</span> Chyba pri komunikácii.</div>`;
+    }
+  }
+
+  document.getElementById('user-input')
+    .addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') sendMessage();
+    });
+</script>
+
 </body>
 </html>
-
