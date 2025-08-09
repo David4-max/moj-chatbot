@@ -39,32 +39,3 @@
   </style>
 </head>
 <body>
-  <div id="chat-widget">
-    <div id="messages"></div>
-    <input id="user-input" placeholder="Napíš otázku...">
-    <button onclick="sendMessage()">Odoslať</button>
-  </div>
-
-  <script>
-    async function sendMessage() {
-      let input = document.getElementById("user-input");
-      let message = input.value.trim();
-      if (!message) return;
-
-      document.getElementById("messages").innerHTML += "<p><b>Ty:</b> " + message + "</p>";
-
-      let response = await fetch("/chat", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ message })
-      });
-
-      let data = await response.json();
-
-      document.getElementById("messages").innerHTML += "<p><b>Bot:</b> " + data.reply + "</p>";
-      input.value = "";
-    }
-  </script>
-</body>
-</html>
-</html>
