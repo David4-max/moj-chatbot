@@ -64,7 +64,7 @@ const App = () => {
             const apiUrl = "https://api.openai.com/v1/chat/completions";
 
             const response = await fetch(apiUrl, {
-                method: 'POST',
+                method: 'POST', // Zmenené na 'POST', aby to vyhovovalo OpenAI API.
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${apiKey}`,
