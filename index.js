@@ -39,3 +39,20 @@ app.post('/chat', async (req, res) => {
         { role: "system", content: systemMessage },
         { role: "user", content: message }
       ],
+      max_tokens: 150
+    });
+
+    res.json({ reply: completion.choices[0].message.content });
+  } catch (error) {
+    console.error('Chyba pri komunikácii s OpenAI:', error);
+    res.status(500).json({ reply: 'Ospravedlňujem sa, nastala chyba. Skús to neskôr.' });
+  }
+});
+
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log(`Server beží na http://localhost:${port}`);
+  });
+}
+
+module.exports = app;
